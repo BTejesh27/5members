@@ -56,17 +56,13 @@
         <form action="" method="post">
         <div class="form-group">
     <label>Year:</label>
-    <div>  <label for="year1">1</label>
-        <input type="radio" id="year1" name="year" value="1" required>
-      
-        <label for="year2">2</label>
-        <input type="radio" id="year2" name="year" value="2" required>
-        
-        <label for="year3">3</label>
-        <input type="radio" id="year3" name="year" value="3" required>
-       
-        <label for="year4">4</label>
-        <input type="radio" id="year4" name="year" value="4" required>
+    <div>  <select id="semester" name="year" required>
+        <option value="1"> 1</option>
+        <option value="2"> 2</option>
+        <option value="3"> 3</option>
+        <option value="4"> 4</option>
+        <!-- Add more semester options as needed -->
+    </select>
     
     </div>
 </div>
@@ -87,9 +83,16 @@
             $pdf=$_POST['pdf'];
             $conn=mysqli_connect("localhost","root","","fullstack");
             $insert="insert into syllabus  values('$year','$pdf')";
-            mysqli_query($conn,$insert);
-            mysqli_close($conn);
-                        echo "syllabus added";
+            if(mysqli_query($conn, $insert)) {
+                mysqli_close($conn);
+                echo "Notes added";
+        
+                // Redirect to the home page after inserting the data
+                header("Location: index.html"); // Replace "home.php" with the actual URL of your home page
+                exit(); // Make sure to exit after redirection
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
 
 
 
