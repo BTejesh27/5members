@@ -70,7 +70,7 @@
             
            
             <div class="form-group">
-            <label for="image">Upload Picture:</label>
+            <label for="image">Upload Syllabus:</label>
         <input type="file" name="image" accept=".pdf" required>            </div>
             <button type="submit" name="submit">Submit</button>
         </form>

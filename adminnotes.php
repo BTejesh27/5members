@@ -51,6 +51,7 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <h2>Input Form</h2>
         <form action="" method="post" enctype="multipart/form-data">
@@ -96,7 +97,7 @@
 </div>
 
             <div class="form-group">
-                <label for="pdf">Upload PDF:</label>
+                <label for="pdf">Upload Notes:</label>
                 <input type="file" id="pdf" name="image" accept=".pdf" required>
             </div>
             <button type="submit" name="submit">Submit</button>
@@ -128,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert = "INSERT INTO Notes VALUES('$year','$sem','$sub','$unit','$image')";
 
     if ($conn->query($insert) === TRUE) {
-      echo"hello";
+      echo "NOTES ADDES SUCCESSFULLY";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

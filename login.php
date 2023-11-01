@@ -3,10 +3,14 @@
         <title>Login</title>
         <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-
         .container {
             max-width: 400px;
             margin: 0 auto;
