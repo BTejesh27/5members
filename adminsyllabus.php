@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO syllabus (year,pdfs) VALUES ('$name',  '$image')";
 
     if ($conn->query($sql) === TRUE) {
-      echo"hi";
+      echo"Syllabus uploaded successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
