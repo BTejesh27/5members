@@ -76,7 +76,7 @@
         </form>
         <br><br><br><br>
        
-    </div>
+    
     <?php
 $servername = "localhost";
 $username = "root";
@@ -109,6 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn->close();
 }
-?>
+?></div>
 </body>
 </html>
