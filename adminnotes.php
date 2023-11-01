@@ -53,7 +53,7 @@
 <body>
     <div class="container">
         <h2>Input Form</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
     <label>Year:</label>
     <div>  
@@ -97,34 +97,46 @@
 
             <div class="form-group">
                 <label for="pdf">Upload PDF:</label>
-                <input type="file" id="pdf" name="pdf" accept=".pdf" required>
+                <input type="file" id="pdf" name="image" accept=".pdf" required>
             </div>
             <button type="submit" name="submit">Submit</button>
         </form>
         <br><br><br><br>
         <?php
-if(isset($_POST['submit'])){
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "fullstack";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $year = $_POST['year'];
     $sem = $_POST['sem'];
     $sub = $_POST['subject'];
     $unit = $_POST['unit'];
-    $pdf = $_FILES['pdf']['name'];
+    $image = $_FILES['image']['name'];
+    $target_dir = "upl/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
 
-    $conn = mysqli_connect("localhost","root","","fullstack");
-    $insert = "INSERT INTO Notes VALUES('$year','$sem','$sub','$unit','$pdf')";
-    if(mysqli_query($conn, $insert)) {
-        mysqli_close($conn);
-        echo "Notes added";
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
 
-        // Redirect to the home page after inserting the data
-        header("Location: index.html"); // Replace "home.php" with the actual URL of your home page
-        exit(); // Make sure to exit after redirection
+    $insert = "INSERT INTO Notes VALUES('$year','$sem','$sub','$unit','$image')";
+
+    if ($conn->query($insert) === TRUE) {
+      echo"hello";
     } else {
-        echo "Error: " . mysqli_error($conn);
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-}
-?>
 
+    $conn->close();
+}
+
+?>
     </div>
 </body>
 </html>

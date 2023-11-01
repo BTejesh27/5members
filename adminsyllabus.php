@@ -53,10 +53,10 @@
 <body>
     <div class="container">
         <h2>Input Form</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
     <label>Year:</label>
-    <div>  <select id="semester" name="year" required>
+    <div>  <select name="year" required>
         <option value="1"> 1</option>
         <option value="2"> 2</option>
         <option value="3"> 3</option>
@@ -70,37 +70,45 @@
             
            
             <div class="form-group">
-                <label for="pdf">Upload PDF:</label>
-                <input type="file" id="pdf" name="pdf" accept=".pdf" required>
-            </div>
+            <label for="image">Upload Picture:</label>
+        <input type="file" name="image" accept=".pdf" required>            </div>
             <button type="submit" name="submit">Submit</button>
         </form>
         <br><br><br><br>
-        <?php
-        if(isset($_POST['submit'])){
-            
-            $year=$_POST['year'];
-            $pdf=$_POST['pdf'];
-            $conn=mysqli_connect("localhost","root","","fullstack");
-            $insert="insert into syllabus  values('$year','$pdf')";
-            if(mysqli_query($conn, $insert)) {
-                mysqli_close($conn);
-                echo "Notes added";
-        
-                // Redirect to the home page after inserting the data
-                header("Location: index.html"); // Replace "home.php" with the actual URL of your home page
-                exit(); // Make sure to exit after redirection
-            } else {
-                echo "Error: " . mysqli_error($conn);
-            }
-
-
-
-
-
-        }
-        
-        ?>
+       
     </div>
+    <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "fullstack";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["year"];
+   
+    $image = $_FILES["image"]["name"];
+
+    $target_dir = "uploads/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+
+    $sql = "INSERT INTO syllabus (year,pdfs) VALUES ('$name',  '$image')";
+
+    if ($conn->query($sql) === TRUE) {
+      echo"hi";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
+}
+?>
 </body>
 </html>
