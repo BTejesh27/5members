@@ -4,104 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Notes</title>
+    
+   
     <style>
         
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"], input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        input[type="file"] {
-            cursor: pointer;
-        }
-        button[type="submit"] {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 350;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    background-color: #152733;
+    overflow: hidden;
+}
+
+
+.form-holder {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 80vh;
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.form-content .form-items {
+    border: 4px solid #366de6;
+    padding: 40px;
+    display: inline-block;
+    width: 95%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.form-content h3 {
+    color: #fff;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 20px;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 5px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: #ffffff;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
+    width: 90%;
+    padding: 7px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #dde8ec;
+    font-size: 15px;
+    font-weight: 300;
+    color: #1d31e9;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 90%;
+    padding: 8px 18px;
+    border-radius: 5px;
+    text-align: left;
+    background-color: #f3f0f0;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 100px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.mv-up{
+    margin-top: -10px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+
+
     </style>
 </head>
 <body>
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder d-flex align-items-center">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Input Form</h3>
+                        <p>Fill in the data below.</p>
+                        <form action="" method="post" enctype="multipart/form-data">
 
-    <div class="container">
-        <h2>Input Form</h2>
-        <form action="" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-    <label>Year:</label>
-    <div>  
-    <select id="semester" name="year" required>
-        <option value="1"> 1</option>
-        <option value="2"> 2</option>
-        <option value="3"> 3</option>
-        <option value="4"> 4</option>
-        <!-- Add more semester options as needed -->
-    </select>
-    
-    </div>
+                            <div class="col-md-12">
+                                <select class="form-select mt-3" id="semester" name="year" required >
+                                    <option selected disabled value="">Year</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                             </select>
+                            </div>
+
+                           
+
+                           <div class="col-md-12">
+                                <select class="form-select mt-3"id="semester" name="sem" required>
+                                      <option selected disabled value="">Semester</option>
+                                      <option value="1">1</option>
+                                    <option value="2">2</option>
+                                     
+                               </select>
+                               
+                           </div>
+
+
+                           <div class="col-md-12">
+                              <input class="form-content mt-3"type="text" id="subject" name="subject" placeholder="Subject" required>
+                               
+                           </div>
+
+
+                           <div class="col-md-12">
+                            <select class="form-select mt-3" id="semester" name="unit" required >
+                                <option selected disabled value="">Unit</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                         </select>
+                        </div>
+                        <div class="col-md-12">
+                            <input class="form-control mt-3"type="file" id="pdf" name="pdf" accept=".pdf" required>
+                        </div>
+                        
+                        <div class="form-button mt-3">
+    <button id="submit" type="submit" name="submit" class="btn btn-primary">Submit</button>
 </div>
 
-<div class="form-group">
-    <label for="semester">Semester:</label>
-    <select id="semester" name="sem" required>
-        <option value="1">Semester 1</option>
-        <option value="2" >Semester 2</option>
-        <!-- Add more semester options as needed -->
-    </select>
-</div>
-<div class="form-group">
-    <label for="subject">Subject:</label>
-    <input type="text" id="subject" name="subject" required>
-</div>
-<div class="form-group">
-    <label>Unit:</label>
-    <div>  
-    <select id="semester" name="unit" required>
-        <option value="1"> 1</option>
-        <option value="2"> 2</option>
-        <option value="3"> 3</option>
-        <option value="4"> 4</option>
-        <option value="5"> 5</option>
-        <!-- Add more semester options as needed -->
-    </select>
-    
-    </div>
-</div>
-
-            <div class="form-group">
-                <label for="pdf">Upload Notes:</label>
-                <input type="file" id="pdf" name="image" accept=".pdf" required>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <button type="submit" name="submit">Submit</button>
-        </form>
+        </div>
+    </div>
+ 
         <br><br><br><br>
         <?php
 $servername = "localhost";

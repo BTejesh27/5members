@@ -62,7 +62,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM notes WHERE year =4 ORDER BY unit";
+        $sql = "SELECT * FROM notes WHERE year =4 ORDER BY sub,sem,unit";
 
         $result = $conn->query($sql);
 
