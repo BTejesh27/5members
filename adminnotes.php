@@ -195,7 +195,7 @@ html, body {
                            </div>
 
 
-                           <div class="col-md-12">
+                           <div class="col-md-12" style="margin: 0 47px 0 0;">
                               <input class="form-content mt-3"type="text" id="subject" name="subject" placeholder="Subject" required>
                                
                            </div>
@@ -210,11 +210,11 @@ html, body {
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                          </select>
-                        </div>
-                        <div class="col-md-12">
+                        </div><br>
+                        <div class="col-md-12" style="background-color:#dde8ec;margin: 0 50px 0 0; padding:10px;">
                             <input class="form-control mt-3"type="file" id="pdf" name="pdf" accept=".pdf" required>
                         </div>
-                        
+                        <br>
                         <div class="form-button mt-3">
     <button id="submit" type="submit" name="submit" class="btn btn-primary">Submit</button>
 </div>

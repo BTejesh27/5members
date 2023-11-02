@@ -185,7 +185,7 @@ html, body {
 
                            <br><br>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="background-color:#dde8ec;margin: 0 50px 0 0; padding:8px;">
                             <input class="form-control mt-3"type="file" id="pdf" name="image" accept=".pdf" required>
                         </div><br><br>
                         
