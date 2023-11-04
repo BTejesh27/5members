@@ -20,7 +20,6 @@
 
 html, body {
     height: 100%;
-    background-color: #152733;
     overflow: hidden;
 }
 
@@ -163,8 +162,9 @@ html, body {
 
     </style>
 </head>
-<body>
-    <div class="form-body">
+<body><div>
+    <div class="form-body" style="    background-color: #152733;
+">
         <div class="row">
             <div class="form-holder d-flex align-items-center">
                 <div class="form-content">
@@ -174,7 +174,7 @@ html, body {
                         <form action="" method="post" enctype="multipart/form-data">
 
                             <div class="col-md-12">
-                                <select class="form-select mt-3" " name="year" required >
+                                <select class="form-select mt-3"  name="year" required >
                                     <option selected disabled value="">Year</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -189,7 +189,7 @@ html, body {
                             <input class="form-control mt-3"type="file" id="pdf" name="image" accept=".pdf" required>
                         </div><br><br>
                         
-                        <div class="form-button mt-3">
+                        <div class="form-button mt-3" style="text-align: center;">
     <button id="submit" type="submit" name="submit" class="btn btn-primary">Submit</button>
 </div>
 
@@ -199,7 +199,7 @@ html, body {
             </div>
         </div>
     </div>
-    
+    </div>
     <?php
 $servername = "localhost";
 $username = "root";
@@ -226,6 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($conn->query($sql) === TRUE) {
       echo"Syllabus uploaded successfully";
+      header("Location: index.html");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

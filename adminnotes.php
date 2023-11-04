@@ -20,7 +20,7 @@
 
 html, body {
     height: 100%;
-    background-color: #152733;
+    
     overflow: hidden;
 }
 
@@ -46,7 +46,7 @@ html, body {
     justify-content: center;
     -webkit-align-items: center;
     align-items: center;
-    padding: 50px;
+    padding: 10px;
 }
 
 .form-content .form-items {
@@ -157,76 +157,167 @@ html, body {
 .valid-feedback{
    color: #2acc80;
 }
+.scrollable-content {
+    height: 100vh; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
 
 
 
     </style>
 </head>
 <body>
-    <div class="form-body">
-        <div class="row">
-            <div class="form-holder d-flex align-items-center">
-                <div class="form-content">
-                    <div class="form-items">
-                        <h3>Input Form</h3>
-                        <p>Fill in the data below.</p>
-                        <form action="" method="post" enctype="multipart/form-data">
+<div class="scrollable-content">
+    
+<div class="form-body" style="background-color: #152733;">
+    <div class="row">
+        <div class="form-holder d-flex align-items-center">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Input Form</h3>
+                    <p>Fill in the data below.</p>
+                    <form action="" method="post" enctype="multipart/form-data">
 
-                            <div class="col-md-12">
-                                <select class="form-select mt-3" id="semester" name="year" required >
-                                    <option selected disabled value="">Year</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                             </select>
-                            </div>
+                        <div class="col-md-12"> <label for="year">Year:</label>
+                            <select class="form-select mt-3" id="year" name="year" required>
+                                <option selected disabled value="">Year</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
 
-                           
+                        <div class="col-md-12"> <label for="semester">Sem:</label>
+                            <select class="form-select mt-3" id="semester" name="sem" required disabled>
+                                <option selected disabled value="">Semester</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12"> <label for="sub">Sub:</label>
+                            <select class="form-select mt-3" id="subject" name="subject" required>
+                                <option selected disabled value="">subject</option>
+                                <option value="1">m1</option>
+                                <option value="2">m3</option>
+                                <option value="3">python</option>
+                                <option value="4">c</option>
+                                <option value="5">html</option>
+                            </select>
+                        </div>
+                        
 
-                           <div class="col-md-12">
-                                <select class="form-select mt-3"id="semester" name="sem" required>
-                                      <option selected disabled value="">Semester</option>
-                                      <option value="1">1</option>
-                                    <option value="2">2</option>
-                                     
-                               </select>
-                               
-                           </div>
-
-
-                           <div class="col-md-12" style="margin: 0 47px 0 0;">
-                              <input class="form-content mt-3"type="text" id="subject" name="subject" placeholder="Subject" required>
-                               
-                           </div>
-
-
-                           <div class="col-md-12">
-                            <select class="form-select mt-3" id="semester" name="unit" required >
+                        <div class="col-md-12"> <label for="unit">Unit:</label>
+                            <select class="form-select mt-3" id="unit" name="unit" required>
                                 <option selected disabled value="">Unit</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                         </select>
+                            </select>
                         </div><br>
-                        <div class="col-md-12" style="background-color:#dde8ec;margin: 0 50px 0 0; padding:10px;">
-                            <input class="form-control mt-3"type="file" id="pdf" name="pdf" accept=".pdf" required>
+                        <div class="col-md-12" style="background-color: #dde8ec; margin: 0 50px 0 0; padding: 10px;">
+                        <label for="year" style="color:#152733">PDF:</label> <input   class="form-control mt-3" type="file" id="pdf" name="pdf" accept=".pdf" required>
                         </div>
                         <br>
                         <div class="form-button mt-3">
-    <button id="submit" type="submit" name="submit" class="btn btn-primary">Submit</button>
-</div>
+                            <button id="submit" type="submit" name="submit" class="btn btn-primary">Submit</button>
+                        </div>
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
- 
-        <br><br><br><br>
+</div>
+
+
+
+<script>
+    // JavaScript to dynamically update the semester options based on the selected year
+    document.getElementById('year').addEventListener('change', function () {
+        var yearSelect = document.getElementById('year');
+        var semesterSelect = document.getElementById('semester');
+
+        // Disable semester select by default
+        semesterSelect.innerHTML = '';
+        semesterSelect.disabled = true;
+
+        if (yearSelect.value === '1') {
+            // Add semester options for year 1
+            addSemesterOption(1, '1');
+            addSemesterOption(2, '2');
+        } else if (yearSelect.value === '2') {
+            // Add semester options for year 2
+            addSemesterOption(3, '3');
+            addSemesterOption(4, '4');
+        }
+        else if (yearSelect.value === '3') {
+            // Add semester options for year 3
+            addSemesterOption(5, '5');
+            addSemesterOption(6, '6');
+        }else if (yearSelect.value === '4') {
+            // Add semester options for year 4
+            addSemesterOption(7, '7');
+            addSemesterOption(8, '8');
+        } // Add more conditions for other years if needed
+
+        function addSemesterOption(value, text) {
+            var option = document.createElement('option');
+            option.value = value;
+            option.text = text;
+            semesterSelect.appendChild(option);
+        }
+
+        // Enable the semester select after a year is selected
+        semesterSelect.disabled = false;
+    });
+    
+</script>
+<script>
+    document.getElementById('year').addEventListener('change', updateSubjectOptions);
+    document.getElementById('semester').addEventListener('change', updateSubjectOptions);
+
+    function updateSubjectOptions() {
+        const yearSelect = document.getElementById('year');
+        const semesterSelect = document.getElementById('semester');
+        const subjectSelect = document.getElementById('subject');
+
+        const year = yearSelect.value;
+        const semester = semesterSelect.value;
+
+        // Clear existing options
+        subjectSelect.innerHTML = '<option selected disabled value="">Select a Subject</option>';
+
+        // Define subject options based on year and semester
+        const subjectOptions = {
+            '1-1': ['M1', 'Biology','M1', 'Biology'],
+            '1-2': ['M2', 'Physics','M1', 'Biology'],
+            '2-3': ['M3', 'English','M1', 'Biology'],
+            '2-4': ['M4', 'Telugu','M1', 'Biology'],
+            '3-5': ['M5', 'Social'],
+            '3-6': ['Python', 'Biology'],
+            '4-7': ['Java', 'C'],
+            '4-8': ['HTML', 'CSS'],
+        };
+
+        const key = year + '-' + semester;
+        const options = subjectOptions[key];
+
+        if (options) {
+            options.forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject;
+                option.text = subject;
+                subjectSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Initially update subject options when the page loads
+    updateSubjectOptions();
+</script>
+
+        
         <?php
 $servername = "localhost";
 $username = "root";
@@ -244,16 +335,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sem = $_POST['sem'];
     $sub = $_POST['subject'];
     $unit = $_POST['unit'];
-    $image = $_FILES['image']['name'];
+    $image = $_FILES['pdf']['name'];
     $target_dir = "upl/";
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $target_file = $target_dir . basename($_FILES["pdf"]["name"]);
 
-    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    move_uploaded_file($_FILES["pdf"]["tmp_name"], $target_file);
 
     $insert = "INSERT INTO Notes VALUES('$year','$sem','$sub','$unit','$image')";
 
     if ($conn->query($insert) === TRUE) {
-      echo "NOTES ADDES SUCCESSFULLY";
+      echo '<div style="text-align: center;  color: #2acc80; font-weight: bold;"><h1>NOTES ADDED SUCCESSFULLY</h1> </div>';
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -261,7 +352,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-?>
-    </div>
+?><br><br>
+</div>
 </body>
 </html>
