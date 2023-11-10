@@ -157,12 +157,16 @@ html, body {
 .valid-feedback{
    color: #2acc80;
 }
-
+.scrollable-content {
+    height: 100vh; /* Adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
 
 
     </style>
 </head>
-<body><div>
+<body>
+<div class="scrollable-content"><div>
     <div class="form-body" style="    background-color: #152733;
 ">
         <div class="row">
@@ -214,25 +218,31 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["year"];
-   
     $image = $_FILES["image"]["name"];
 
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
 
     move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    $update = "SELECT * FROM `syllabus` WHERE `year`='$name'";
+    $check = mysqli_query($conn, $update);
 
-    $sql = "INSERT INTO syllabus (year,pdfs) VALUES ('$name',  '$image')";
-
-    if ($conn->query($sql) === TRUE) {
-      echo"Syllabus uploaded successfully";
-      header("Location: index.html");
+    if (mysqli_num_rows($check) > 0) {
+        $quupdate = "UPDATE `syllabus` SET `pdfs`='$image' WHERE `year`='$name' ";
+        mysqli_query($conn, $quupdate);
+        echo '<div style="text-align: center; color: #2acc80; font-weight: bold;"><h1>SYLLABUS UPDATED SUCCESSFULLY</h1> </div>';
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $sql = "INSERT INTO syllabus (year, pdfs) VALUES ('$name', '$image')";
+        if ($conn->query($sql) === TRUE) {
+            echo '<div style="text-align: center; color: #2acc80; font-weight: bold;"><h1>SYLLABUS ADDED SUCCESSFULLY</h1> </div>';
+           
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
-
     $conn->close();
 }
-?></div>
+?>
+</div></DIV>
 </body>
 </html>

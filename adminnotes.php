@@ -317,8 +317,7 @@ html, body {
     updateSubjectOptions();
 </script>
 
-        
-        <?php
+<?php
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -341,18 +340,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     move_uploaded_file($_FILES["pdf"]["tmp_name"], $target_file);
 
-    $insert = "INSERT INTO Notes VALUES('$year','$sem','$sub','$unit','$image')";
+    $update = "SELECT * FROM `notes` WHERE `sub`='$sub' AND `unit`='$unit'";
+    $check = mysqli_query($conn, $update);
 
-    if ($conn->query($insert) === TRUE) {
-      echo '<div style="text-align: center;  color: #2acc80; font-weight: bold;"><h1>NOTES ADDED SUCCESSFULLY</h1> </div>';
+    if (mysqli_num_rows($check) > 0) {
+        $quupdate = "UPDATE `notes` SET `pdf`='$image' WHERE `sub`='$sub' AND `unit`='$unit'";
+        mysqli_query($conn, $quupdate);
+        echo '<div style="text-align: center; color: #2acc80; font-weight: bold;"><h1>NOTES UPDATED SUCCESSFULLY</h1> </div>';
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $insert = "INSERT INTO `notes` VALUES('$year','$sem','$sub','$unit','$image')";
+        if ($conn->query($insert) === TRUE) {
+            echo '<div style="text-align: center; color: #2acc80; font-weight: bold;"><h1>NOTES ADDED SUCCESSFULLY</h1> </div>';
+        } else {
+            echo "Error: " . $insert . "<br>" . $conn->error;
+        }
     }
 
     $conn->close();
 }
-
-?><br><br>
+?>
+<br><br>
 </div>
 </body>
 </html>
