@@ -290,14 +290,14 @@ html, body {
 
         // Define subject options based on year and semester
         const subjectOptions = {
-            '1-1': ['M1', 'Biology','M1', 'Biology'],
-            '1-2': ['M2', 'Physics','M1', 'Biology'],
-            '2-3': ['M3', 'English','M1', 'Biology'],
-            '2-4': ['M4', 'Telugu','M1', 'Biology'],
-            '3-5': ['M5', 'Social'],
-            '3-6': ['Python', 'Biology'],
-            '4-7': ['Java', 'C'],
-            '4-8': ['HTML', 'CSS'],
+            '1-1': ['ENGLISH', 'M1','CHEMISTRY', 'BASIC SIVIL & MECHANICAL ENGINEERING','CG','ES'],
+            '1-2': ['M2', 'PHYSICS','BEEE', 'EG','DS'],
+            '2-3': ['NMVC', 'MFCS','JAVA', 'DBMS','MEFA','EP'],
+            '2-4': ['DSSM', 'CO','DAA', 'OS','CG','ES'],
+            '3-5': ['DWDM', 'CAD','ML', 'PE-1','OE-1'],
+            '3-6': ['CN', 'ATCD','SE', 'PE-2','OE-2'],
+            '4-7': [],
+            '4-8': [],
         };
 
         const key = year + '-' + semester;
