@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
         table {
@@ -12,7 +12,8 @@
             border-radius: 8px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: center;
         }
@@ -40,7 +41,8 @@
         }
     </style>
 </head>
-<body >
+
+<body>
     <table>
         <tr>
             <th>Year</th>
@@ -52,15 +54,7 @@
 
         <?php
         // ... Your PHP code for the first table ...$servername = "localhost";
-        $servername = "localhost"; $username = "root";
-        $password = "";
-        $dbname = "fullstack";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        include "connect.php";
 
         $sql = "SELECT * FROM notes WHERE year = 3 ORDER BY sem,sub,unit";
 
@@ -83,25 +77,16 @@
         $conn->close();
         ?>
     </table>
-    
+
     <table>
         <tr>
             <th>Year</th>
-            
+
             <th>SYLLABUS</th>
         </tr>
 
         <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "fullstack";
-
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        include 'connect.php';
 
         $sql = "SELECT * FROM syllabus WHERE year = 3 ";
 
@@ -111,8 +96,8 @@
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["year"] . "</td>";
-               
-                
+
+
                 echo "<td><a download href='upl/" . $row["pdfs"] . "'>Download PDF</a></td>";
                 echo "</tr>";
             }
@@ -124,9 +109,7 @@
         // ... Your PHP code for the second table ...
         ?>
     </table>
-    
+
 </body>
+
 </html>
-
-
-
